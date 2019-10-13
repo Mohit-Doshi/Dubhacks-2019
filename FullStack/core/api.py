@@ -7,14 +7,15 @@ class incidentAPI(Resource):
     def post(self):
         try:
             #Load json
-            incidentData = requent.json
+            incidentData = requent.json['body']
             location = incidentData['location']
-            time = incidentData['username']
-            types = incidentData['username']
-            link = incidentData['username']
-            start = incidentData['username']
-            end = incidentData['username']
+            time = incidentData['time']
+            types = incidentData['types']
+            link = incidentData['link']
+            start = incidentData['start']
+            end = incidentData['end']
             username = incidentData['username']
+            contact = incidentData['contact']
 
             #Enter incdent into database
             #user_ref = db.collection(u'users').document(username)
@@ -50,10 +51,10 @@ class incidentAPI(Resource):
 
             Primary Owner Contact:
             %s
-            """ % (location,time ,types, firearm, link, start, end, username )
+            """ % (location,time ,types, firearm, link, start, end, username, contact)
             mail.send(msg)
 
-            return msg
+            return f"Success"
 
         except Exception as e:
             return f"An Error Occured: {e}"
